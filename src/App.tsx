@@ -47,6 +47,8 @@ function App() {
     }
   };
 
+ 
+
   const loadData = async () => {
     if (!masterKey || !user) return;
     
@@ -75,6 +77,9 @@ function App() {
       setUser({ id: userId, email: '' });
       vaultService.setMasterKey(key, userId);
       setIsAuthenticated(true);
+
+      // Redirect to hosted link after successful authentication
+      window.location.href = 'https://secure-code.netlify.app/dashboard';
     } catch (error) {
       throw new Error('Authentication failed');
     }
