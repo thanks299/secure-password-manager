@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Lock, Plus, Search, Settings, Download, Upload, LogOut, FolderSync as Sync } from 'lucide-react';
+import { Shield, Lock, Plus, Search, Settings, Download, Upload, LogOut, FolderSync as Sync, Menu } from 'lucide-react';
 import AuthModal from './components/AuthModal';
 import PasswordGenerator from './components/PasswordGenerator';
 import PasswordList from './components/PasswordList';
@@ -12,6 +12,7 @@ import { supabase } from './lib/supabase';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [masterKey, setMasterKey] = useState<CryptoKey | null>(null);
   const [passwords, setPasswords] = useState<PasswordEntry[]>([]);
@@ -217,75 +218,134 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
           {/* Header */}
-          <header className="bg-black/20 backdrop-blur-xl border-b border-white/10">
+            <header className="bg-black/20 backdrop-blur-xl border-b border-white/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-wrap items-center justify-between h-16">
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-                    <Shield className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h1 className="text-lg sm:text-xl font-bold text-white">SecureVault</h1>
-                    {user && (
-                      <p className="text-xs sm:text-sm text-gray-400">{user.email}</p>
-                    )}
-                  </div>
+              <div className="flex items-center justify-between h-16">
+              {/* Logo Section */}
+              <div className="flex items-center space-x-3">
+                <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+                <Shield className="w-6 h-6 text-white" />
                 </div>
-    
-                <div className="flex flex-wrap items-center space-x-2">
-                  <button
-                    onClick={() => setShowGenerator(true)}
-                    className="flex items-center space-x-2 px-3 py-2 sm:px-4 sm:py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105"
-                  >
-                    <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
-                    <span className="hidden sm:inline">Generate</span>
-                  </button>
-    
-                  <button
-                    onClick={syncData}
-                    disabled={isSyncing}
-                    className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 disabled:opacity-50"
-                    title="Sync data"
-                  >
-                    <Sync className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} />
-                  </button>
-    
-                  <button
-                    onClick={exportData}
-                    className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
-                    title="Export data"
-                  >
-                    <Download className="w-5 h-5" />
-                  </button>
-    
-                  <label className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 cursor-pointer" title="Import data">
-                    <Upload className="w-5 h-5" />
-                    <input
-                      type="file"
-                      accept=".json"
-                      onChange={importData}
-                      className="hidden"
-                    />
-                  </label>
-    
-                  <button
-                    onClick={() => setShowSettings(true)}
-                    className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
-                  >
-                    <Settings className="w-5 h-5" />
-                  </button>
-    
-                  <button
-                    onClick={handleSignOut}
-                    className="p-2 text-gray-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
-                    title="Sign out"
-                  >
-                    <LogOut className="w-5 h-5" />
-                  </button>
+                <div>
+                <h1 className="text-lg sm:text-xl font-bold text-white">SecureVault</h1>
+                {user && <p className="text-xs sm:text-sm text-gray-400">{user.email}</p>}
                 </div>
               </div>
+
+              {/* Menu Burger for Mobile */}
+              <button
+                className="sm:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(!isMenuOpen)} // Toggle menu state
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+
+              {/* Desktop Menu */}
+              <div className="hidden sm:flex items-center space-x-2">
+                <button
+                onClick={() => setShowGenerator(true)}
+                className="flex items-center space-x-2 px-3 py-2 sm:px-4 sm:py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105"
+                >
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Generate</span>
+                </button>
+
+                <button
+                onClick={syncData}
+                disabled={isSyncing}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 disabled:opacity-50"
+                title="Sync data"
+                >
+                <Sync className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} />
+                </button>
+
+                <button
+                onClick={exportData}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+                title="Export data"
+                >
+                <Download className="w-5 h-5" />
+                </button>
+
+                <label
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 cursor-pointer"
+                title="Import data"
+                >
+                <Upload className="w-5 h-5" />
+                <input type="file" accept=".json" onChange={importData} className="hidden" />
+                </label>
+
+                <button
+                onClick={() => setShowSettings(true)}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+                >
+                <Settings className="w-5 h-5" />
+                </button>
+
+                <button
+                onClick={handleSignOut}
+                className="p-2 text-gray-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                title="Sign out"
+                >
+                <LogOut className="w-5 h-5" />
+                </button>
+              </div>
+              </div>
+
+              {/* Mobile Menu */}
+              {isMenuOpen && (
+              <div className="sm:hidden flex flex-col space-y-2 mt-4">
+                <button
+                onClick={() => setShowGenerator(true)}
+                className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105"
+                >
+                <Plus className="w-4 h-4" />
+                <span>Generate</span>
+                </button>
+
+                <button
+                onClick={syncData}
+                disabled={isSyncing}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 disabled:opacity-50"
+                title="Sync data"
+                >
+                <Sync className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} />
+                </button>
+
+                <button
+                onClick={exportData}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+                title="Export data"
+                >
+                <Download className="w-5 h-5" />
+                </button>
+
+                <label
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 cursor-pointer"
+                title="Import data"
+                >
+                <Upload className="w-5 h-5" />
+                <input type="file" accept=".json" onChange={importData} className="hidden" />
+                </label>
+
+                <button
+                onClick={() => setShowSettings(true)}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+                >
+                <Settings className="w-5 h-5" />
+                </button>
+
+                <button
+                onClick={handleSignOut}
+                className="p-2 text-gray-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                title="Sign out"
+                >
+                <LogOut className="w-5 h-5" />
+                </button>
+              </div>
+              )}
             </div>
-          </header>
+            </header>
     
           {/* Main Content */}
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
