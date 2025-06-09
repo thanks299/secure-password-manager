@@ -19,21 +19,20 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="w-full max-w-md bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl sm:max-w-lg md:max-w-xl">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg sm:text-xl font-bold text-white">Settings</h2>
+      <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-sm sm:text-lg md:text-xl font-bold text-white">Settings</h2>
           <button
             onClick={onClose}
             className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
           >
-            <X className="w-5 h-5 sm:w-6 sm:h-6" />
+            <X className="w-4 h-4 sm:w-5 sm:h-6" />
           </button>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           {/* Auto Lock Timeout */}
           <div>
-            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm md:text-base font-medium text-gray-300 mb-2">
               Auto Lock Timeout (minutes)
             </label>
             <input
@@ -45,7 +44,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
                 ...prev, 
                 autoLockTimeout: parseInt(e.target.value) || 15 
               }))}
-              className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
             <p className="text-xs sm:text-sm text-gray-400 mt-1">
               Automatically lock the vault after inactivity
@@ -54,7 +53,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
 
           {/* Clipboard Timeout */}
           <div>
-            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm md:text-base font-medium text-gray-300 mb-2">
               Clipboard Clear Timeout (seconds)
             </label>
             <input
@@ -66,7 +65,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
                 ...prev, 
                 clipboardTimeout: parseInt(e.target.value) || 30 
               }))}
-              className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
             <p className="text-xs sm:text-sm text-gray-400 mt-1">
               Clear clipboard after copying passwords
@@ -75,7 +74,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
 
           {/* Default Password Length */}
           <div>
-            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm md:text-base font-medium text-gray-300 mb-2">
               Default Password Length
             </label>
             <input
@@ -87,7 +86,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
                 ...prev, 
                 defaultPasswordLength: parseInt(e.target.value) || 16 
               }))}
-              className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
             <p className="text-xs sm:text-sm text-gray-400 mt-1">
               Default length for generated passwords
@@ -96,7 +95,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
 
           {/* Theme */}
           <div>
-            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
+            <label className="block text-xs sm:text-sm md:text-base font-medium text-gray-300 mb-2">
               Theme
             </label>
             <select
@@ -105,7 +104,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
                 ...prev, 
                 theme: e.target.value as 'light' | 'dark' 
               }))}
-              className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             >
               <option value="dark" className="bg-gray-800">Dark</option>
               <option value="light" className="bg-gray-800">Light</option>
@@ -113,8 +112,8 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
           </div>
 
           {/* Security Info */}
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
-            <h3 className="text-sm sm:text-base font-medium text-blue-300 mb-2">Security Information</h3>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 sm:p-4">
+            <h3 className="text-xs sm:text-sm md:text-base font-medium text-blue-300 mb-2">Security Information</h3>
             <ul className="text-xs sm:text-sm text-blue-200 space-y-1">
               <li>• All passwords are encrypted using AES-256-GCM</li>
               <li>• Your master password is never stored</li>
@@ -127,13 +126,13 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-all duration-200"
+              className="flex-1 py-2 sm:py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-all duration-200"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+              className="flex-1 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
             >
               <Save className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Save Settings</span>
