@@ -19,21 +19,21 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="w-full max-w-md bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+      <div className="w-full max-w-md bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl sm:max-w-lg md:max-w-xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-white">Settings</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-white">Settings</h2>
           <button
             onClick={onClose}
             className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Auto Lock Timeout */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
               Auto Lock Timeout (minutes)
             </label>
             <input
@@ -47,14 +47,14 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
               }))}
               className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">
               Automatically lock the vault after inactivity
             </p>
           </div>
 
           {/* Clipboard Timeout */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
               Clipboard Clear Timeout (seconds)
             </label>
             <input
@@ -68,14 +68,14 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
               }))}
               className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">
               Clear clipboard after copying passwords
             </p>
           </div>
 
           {/* Default Password Length */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
               Default Password Length
             </label>
             <input
@@ -89,14 +89,14 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
               }))}
               className="w-full px-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
             />
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs sm:text-sm text-gray-400 mt-1">
               Default length for generated passwords
             </p>
           </div>
 
           {/* Theme */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm sm:text-base font-medium text-gray-300 mb-2">
               Theme
             </label>
             <select
@@ -114,8 +114,8 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
 
           {/* Security Info */}
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
-            <h3 className="text-sm font-medium text-blue-300 mb-2">Security Information</h3>
-            <ul className="text-xs text-blue-200 space-y-1">
+            <h3 className="text-sm sm:text-base font-medium text-blue-300 mb-2">Security Information</h3>
+            <ul className="text-xs sm:text-sm text-blue-200 space-y-1">
               <li>• All passwords are encrypted using AES-256-GCM</li>
               <li>• Your master password is never stored</li>
               <li>• Data is stored locally in your browser</li>
@@ -123,7 +123,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
             </ul>
           </div>
 
-          <div className="flex space-x-3">
+          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
             <button
               type="button"
               onClick={onClose}
@@ -135,7 +135,7 @@ export default function SettingsModal({ settings, onSave, onClose }: SettingsMod
               type="submit"
               className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
             >
-              <Save className="w-4 h-4" />
+              <Save className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Save Settings</span>
             </button>
           </div>

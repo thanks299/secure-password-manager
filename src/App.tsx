@@ -218,170 +218,176 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
       <header className="bg-black/20 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-white">SecureVault</h1>
-                {user && (
-                  <p className="text-xs text-gray-400">{user.email}</p>
-                )}
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setShowGenerator(true)}
-                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105"
-              >
-                <Plus className="w-4 h-4" />
-                <span className="hidden sm:inline">Generate</span>
-              </button>
-              
-              <button
-                onClick={syncData}
-                disabled={isSyncing}
-                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 disabled:opacity-50"
-                title="Sync data"
-              >
-                <Sync className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} />
-              </button>
-              
-              <button
-                onClick={exportData}
-                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
-                title="Export data"
-              >
-                <Download className="w-5 h-5" />
-              </button>
-              
-              <label className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 cursor-pointer" title="Import data">
-                <Upload className="w-5 h-5" />
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={importData}
-                  className="hidden"
-                />
-              </label>
-              
-              <button
-                onClick={() => setShowSettings(true)}
-                className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
-              
-              <button
-                onClick={handleSignOut}
-                className="p-2 text-gray-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
-                title="Sign out"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap items-center justify-between h-16">
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+          <Shield className="w-6 h-6 text-white" />
+          </div>
+          <div>
+          <h1 className="text-xl font-bold text-white">SecureVault</h1>
+          {user && (
+            <p className="text-xs text-gray-400">{user.email}</p>
+          )}
           </div>
         </div>
+        
+        <div className="flex flex-wrap items-center space-x-2">
+          <button
+          onClick={() => setShowGenerator(true)}
+          className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 transform hover:scale-105"
+          >
+          <Plus className="w-4 h-4" />
+          <span className="hidden sm:inline">Generate</span>
+          </button>
+          
+          <button
+          onClick={syncData}
+          disabled={isSyncing}
+          className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 disabled:opacity-50"
+          title="Sync data"
+          >
+          <Sync className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} />
+          </button>
+          
+          <button
+          onClick={exportData}
+          className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+          title="Export data"
+          >
+          <Download className="w-5 h-5" />
+          </button>
+          
+          <label className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 cursor-pointer" title="Import data">
+          <Upload className="w-5 h-5" />
+          <input
+            type="file"
+            accept=".json"
+            onChange={importData}
+            className="hidden"
+          />
+          </label>
+          
+          <button
+          onClick={() => setShowSettings(true)}
+          className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+          >
+          <Settings className="w-5 h-5" />
+          </button>
+          
+          <button
+          onClick={handleSignOut}
+          className="p-2 text-gray-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+          title="Sign out"
+          >
+          <LogOut className="w-5 h-5" />
+          </button>
+        </div>
+        </div>
+      </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Search and Filters */}
-        <div className="mb-8 space-y-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search passwords..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-            />
-          </div>
-          
-          <div className="flex flex-wrap gap-2">
-            {categories.map(category => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === category
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
-                }`}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-                {category !== 'all' && (
-                  <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">
-                    {passwords.filter(p => p.category === category).length}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
+      {/* Search and Filters */}
+      <div className="mb-8 space-y-4">
+        <div className="relative">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <input
+          type="text"
+          placeholder="Search passwords..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-10 pr-4 py-3 bg-black/20 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+        />
         </div>
-
-        {/* Add Password Button */}
-        <div className="mb-6">
+        
+        <div className="flex flex-wrap gap-2">
+        {categories.map(category => (
           <button
-            onClick={() => {
-              setEditingPassword(null);
-              setShowAddEdit(true);
-            }}
-            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          key={category}
+          onClick={() => setSelectedCategory(category)}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            selectedCategory === category
+            ? 'bg-blue-500 text-white'
+            : 'bg-white/10 text-gray-300 hover:bg-white/20'
+          }`}
           >
-            <Plus className="w-5 h-5" />
-            <span>Add New Password</span>
+          {category.charAt(0).toUpperCase() + category.slice(1)}
+          {category !== 'all' && (
+            <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">
+            {passwords.filter(p => p.category === category).length}
+            </span>
+          )}
           </button>
+        ))}
         </div>
+      </div>
 
-        {/* Loading State */}
-        {isLoading ? (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-400">Loading your vault...</p>
-          </div>
-        ) : (
-          <PasswordList
-            passwords={filteredPasswords}
-            onEdit={(password) => {
-              setEditingPassword(password);
-              setShowAddEdit(true);
-            }}
-            onDelete={handleDeletePassword}
-            clipboardTimeout={settings.clipboardTimeout}
-          />
-        )}
+      {/* Add Password Button */}
+      <div className="mb-6">
+        <button
+        onClick={() => {
+          setEditingPassword(null);
+          setShowAddEdit(true);
+        }}
+        className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+        >
+        <Plus className="w-5 h-5" />
+        <span>Add New Password</span>
+        </button>
+      </div>
+
+      {/* Loading State */}
+      {isLoading ? (
+        <div className="text-center py-12">
+        <div className="w-16 h-16 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-gray-400">Loading your vault...</p>
+        </div>
+      ) : (
+        <PasswordList
+        passwords={filteredPasswords}
+        onEdit={(password) => {
+          setEditingPassword(password);
+          setShowAddEdit(true);
+        }}
+        onDelete={handleDeletePassword}
+        clipboardTimeout={settings.clipboardTimeout}
+        />
+      )}
       </main>
 
       {/* Modals */}
       {showGenerator && (
-        <PasswordGenerator
-          onClose={() => setShowGenerator(false)}
-          defaultLength={settings.defaultPasswordLength}
-        />
+      <PasswordGenerator
+        onClose={() => setShowGenerator(false)}
+        defaultLength={settings.defaultPasswordLength}
+      />
       )}
 
       {showAddEdit && (
-        <AddEditPasswordModal
-          password={editingPassword}
-          onSave={editingPassword ? handleEditPassword : handleAddPassword}
-          onClose={() => {
-            setShowAddEdit(false);
-            setEditingPassword(null);
-          }}
-        />
+      <AddEditPasswordModal
+        password={editingPassword}
+        onSave={(password) => {
+        if ('id' in password && 'createdAt' in password && 'updatedAt' in password) {
+          handleEditPassword(password);
+        } else {
+          handleAddPassword(password);
+        }
+        }}
+        onClose={() => {
+        setShowAddEdit(false);
+        setEditingPassword(null);
+        }}
+      />
       )}
 
       {showSettings && (
-        <SettingsModal
-          settings={settings}
-          onSave={handleSaveSettings}
-          onClose={() => setShowSettings(false)}
-        />
+      <SettingsModal
+        settings={settings}
+        onSave={handleSaveSettings}
+        onClose={() => setShowSettings(false)}
+      />
       )}
     </div>
   );

@@ -34,9 +34,9 @@ export default function PasswordCard({ password, onEdit, onDelete, clipboardTime
   };
 
   return (
-    <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-black/30 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
+    <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-6 hover:bg-black/30 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4">
         <div className="flex-1">
           <div className="flex items-center space-x-2 mb-1">
             <h3 className="text-lg font-semibold text-white truncate">{password.title}</h3>
@@ -47,7 +47,7 @@ export default function PasswordCard({ password, onEdit, onDelete, clipboardTime
           <p className="text-sm text-gray-400 truncate">{password.username}</p>
         </div>
         
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1 mt-2 md:mt-0">
           <button
             onClick={() => onEdit(password)}
             className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
@@ -152,11 +152,11 @@ export default function PasswordCard({ password, onEdit, onDelete, clipboardTime
       </div>
 
       {/* Category and Tags */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
         <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">
           {password.category}
         </span>
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-gray-500 mt-2 md:mt-0">
           {new Date(password.updatedAt).toLocaleDateString()}
         </span>
       </div>
